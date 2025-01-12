@@ -4,6 +4,7 @@ import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes';
 import bookRoutes from './routes/bookRoutes';
+import errorHandler from './middlewares/errorHandler';
 
 dotenv.config();
 
@@ -21,6 +22,9 @@ app.use('/books', bookRoutes);
 app.get('/', (req: Request, res: Response) => {
   res.send('Library Management API is working!');
 });
+
+// Error Handling Middleware
+app.use(errorHandler);
 
 // Start the server
 app.listen(PORT, () => {
