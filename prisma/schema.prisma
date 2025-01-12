@@ -12,3 +12,25 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id      Int      @id @default(autoincrement())
+  name    String
+  borrows Borrow[]
+}
+
+model Book {
+  id      Int      @id @default(autoincrement())
+  name    String
+  borrows Borrow[]
+}
+
+model Borrow {
+  id         Int       @id @default(autoincrement())
+  user       User      @relation(fields: [userId], references: [id])
+  userId     Int
+  book       Book      @relation(fields: [bookId], references: [id])
+  bookId     Int
+  returnedAt DateTime?
+  userScore  Int?
+}
