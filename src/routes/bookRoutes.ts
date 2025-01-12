@@ -6,6 +6,8 @@ import {
   getBookById,
   createBook,
 } from '../controllers/bookController';
+import validate from '../middlewares/validate';
+import { createBookSchema } from '../validators/bookValidator';
 
 const router = express.Router();
 
@@ -16,6 +18,6 @@ router.get('/', getBooks);
 router.get('/:id', getBookById);
 
 // POST /books
-router.post('/', createBook);
+router.post('/', validate(createBookSchema), createBook);
 
 export default router;
