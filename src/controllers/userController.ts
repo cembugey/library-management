@@ -88,10 +88,10 @@ export const createUser = async (
   const { name } = req.body;
 
   try {
-    const newUser = await prisma.user.create({
+    await prisma.user.create({
       data: { name },
     });
-    res.status(201).json(newUser);
+    res.status(201).send('');
   } catch (error) {
     next(error);
   }

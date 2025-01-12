@@ -75,10 +75,10 @@ export const createBook = async (
   const { name } = req.body;
 
   try {
-    const newBook = await prisma.book.create({
+    await prisma.book.create({
       data: { name },
     });
-    res.status(201).json(newBook);
+    res.status(201).send('');
   } catch (error) {
     next(error);
   }
